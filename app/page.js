@@ -107,7 +107,7 @@ function Home() {
     about: {
       name: 'about.js',
       content: (
-        <div className="p-6  h-screen animate-fade-in">
+        <div className="p-6  animate-fade-in">
           <h1 className="text-2xl font-bold mb-4 animate-slide-in">John Doe</h1>
           <p className="text-gray-300 mb-4 animate-slide-in">
             Full Stack Developer with 5 years of experience building web applications.
@@ -145,7 +145,7 @@ function Home() {
     projects: {
       name: 'projects.js',
       content: (
-        <div className="p-6 h-screen animate-fade-in">
+        <div className="p-6 animate-fade-in">
           <h2 className="text-xl font-bold mb-4 animate-slide-in">Projects</h2>
           <div className="space-y-6">
             <div className="border border-gray-700 rounded p-4 animate-slide-in hover:border-blue-400 transition-colors">
@@ -177,7 +177,7 @@ function Home() {
     contact: {
       name: 'contact.js',
       content: (
-        <div className="p-6 h-screen animate-fade-in">
+        <div className="p-6  animate-fade-in">
           <h2 className="text-xl font-bold mb-4 animate-slide-in">Contact Me</h2>
           <form className="space-y-4">
             <div className="animate-slide-in">
@@ -210,70 +210,77 @@ function Home() {
   };
 
   return (
-    <div className="min-h-screen h-screen bg-gray-900 text-gray-100">
-      {/* Top Bar */}
-       
-       <Header {...{
+    <div className="flex h-screen flex-col bg-gray-900 text-gray-100">
+    {/* Top Bar */}
+    <Header
+      {...{
         onclick: toggleExplorer,
-        isExplorerOpen
-      }} />
-
-      <div className="flex">
-        <SideBarNav  {...{
+        isExplorerOpen,
+      }}
+    />
+  
+    <div className="flex flex-grow overflow-hidden">
+      {/* Sidebar */}
+      <SideBarNav
+        {...{
           onclick: toggleExplorer,
           isExplorerOpen,
           toggleExplorer,
           openFolders,
           setActiveTab,
           activeTab,
-          fileStructure
-
-        }} />
-
-        {/* Main Content */}
-        <div className="flex-1 bg-gray-900">
-          {/* Tab Bar */}
-          
-
-          {/* Content Area */}
-         <VisualBody {...{
-          activeTab,
-          isExplorerOpen,
-          files,
-          setActiveTab
-         }} />
-        </div>
+          fileStructure,
+        }}
+      />
+  
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col bg-gray-900 overflow-auto">
+        {/* Content Area */}
+        <VisualBody
+          {...{
+            activeTab,
+            isExplorerOpen,
+            files,
+            setActiveTab,
+          }}
+        />
       </div>
-
-      {/* footer Bar */}
-      <Footer />
-
-      <style jsx global>{`
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-
-        @keyframes slideIn {
-          from { 
-            transform: translateX(-20px);
-            opacity: 0;
-          }
-          to {
-            transform: translateX(0);
-            opacity: 1;
-          }
-        }
-
-        .animate-fade-in {
-          animation: fadeIn 0.3s ease-in-out;
-        }
-
-        .animate-slide-in {
-          animation: slideIn 0.3s ease-in-out;
-        }
-      `}</style>
     </div>
+  
+    {/* Footer */}
+    <Footer />
+  
+    <style jsx global>{`
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+  
+      @keyframes slideIn {
+        from {
+          transform: translateX(-20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+  
+      .animate-fade-in {
+        animation: fadeIn 0.3s ease-in-out;
+      }
+  
+      .animate-slide-in {
+        animation: slideIn 0.3s ease-in-out;
+      }
+    `}</style>
+  </div>
+  
   );
 }
 
